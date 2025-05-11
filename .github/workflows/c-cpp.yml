@@ -1,0 +1,22 @@
+name: C++ CI (CMake)
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Install CMake
+      run: sudo apt-get install -y cmake g++
+
+    - name: Configure
+      run: cmake -S . -B build
+
+    - name: Build
+      run: cmake --build build
+
+    - name: Run
+      run: ./build/loop_example
